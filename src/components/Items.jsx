@@ -22,6 +22,7 @@ const Items = ({ index, description }) => {
 export default Items;
 
 const Item = styled.div`
+  margin-right: 32px;
   width: 420px;
   padding: 20px;
   background: #ffffff;

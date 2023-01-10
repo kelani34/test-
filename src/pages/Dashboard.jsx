@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
+import DashboardModal from "../components/DashboardModal";
 
 const items = [
   {
@@ -57,21 +58,7 @@ const Dashboard = () => {
           })}
         </div>
 
-        <PopupState variant="popover" popupId="demo-popup-menu">
-          {(popupState) => (
-            <React.Fragment>
-              <Button
-                {...bindTrigger(popupState)}
-                sx={{ textTransform: "none" }}
-              >
-                <img src={AddIcon} className="add-icon" alt="add" />
-              </Button>
-              <Menu {...bindMenu(popupState)}>
-                <MenuItem></MenuItem>
-              </Menu>
-            </React.Fragment>
-          )}
-        </PopupState>
+        <DashboardModal />
       </div>
     </Wrapper>
   );
