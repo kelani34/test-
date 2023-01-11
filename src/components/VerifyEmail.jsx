@@ -1,10 +1,13 @@
+import { Link } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
 const VerifyEmail = () => {
   return (
     <Wrapper>
-      You have not verified your email address. Click here to resend
-      verification link.
+      <p>
+        You have not verified your email address. Click <Link> here </Link> to
+        resend verification link.
+      </p>
     </Wrapper>
   );
 };
@@ -17,4 +20,5 @@ const Wrapper = styled.div`
   background: #fff0cb;
   justify-content: center;
   align-items: center;
+  padding: 10px 20px;
 `;
