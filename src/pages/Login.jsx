@@ -142,6 +142,11 @@ const Wrapper = styled.div`
       flex-direction: column;
       .ps-box {
         margin-top: 16px;
+        input {
+          border-right: none;
+          border-top-right-radius: unset;
+          border-bottom-right-radius: unset;
+        }
       }
       .err {
         font-style: normal;
