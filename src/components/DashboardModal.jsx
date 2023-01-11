@@ -1,9 +1,10 @@
-import * as React from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import styled from "styled-components";
+import AddIcon from "../assets/add-icon.svg";
 
 const style = {
   position: "absolute",
@@ -14,14 +15,19 @@ const style = {
   boxShadow: 2,
 };
 
-export default function DashboardModal() {
-  const [open, setOpen] = React.useState(false);
+export default function DashboardModal({ addItem }) {
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const [name, setName] = useState();
+  const [description, setDescription] = useState();
+
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen} style={{ float: "right" }}>
+        <img src={AddIcon} alt="add icon" />
+      </Button>
       <StyledModal
         open={open}
         aria-labelledby="modal-modal-title"
@@ -34,14 +40,30 @@ export default function DashboardModal() {
             </Typography>
           </div>
           <div className="modal__line" />
-          <form>
+          <form
+            id="dashboardmodal"
+            onSubmit={(e) => {
+              handleClose();
+              e.preventDefault();
+              setName("");
+              setDescription("");
+              addItem(name, description);
+            }}
+          >
             <div className="form__name-section">
               <div>
                 <label htmlFor="name">Name</label>
               </div>
 
               <div>
-                <input id="name" placeholder="Input item name here" />
+                <input
+                  id="name"
+                  placeholder="Input item name here"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                />
               </div>
             </div>
 
@@ -50,14 +72,22 @@ export default function DashboardModal() {
                 <label htmlFor="note">Add Note</label>
               </div>
               <div>
-                <textarea placeholder="Type here"></textarea>
+                <textarea
+                  placeholder="Type here"
+                  value={description}
+                  onChange={(e) => {
+                    setDescription(e.target.value);
+                  }}
+                ></textarea>
               </div>
             </div>
             <div className="buttons">
               <button className="cancel" onClick={handleClose}>
                 Cancel
               </button>
-              <button className="create-event">Create Event</button>
+              <button className="create-event" form="dashboardmodal">
+                Create Event
+              </button>
             </div>
           </form>
         </StyledBox>

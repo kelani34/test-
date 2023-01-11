@@ -14,12 +14,12 @@ const style = {
   boxShadow: 2,
 };
 
-export default function EditItem(props, { id, updateItem }) {
+export default function EditItem(props) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [name, setName] = useState(props.names);
+  const [name, setName] = useState(props.name);
   const [description, setDescription] = useState(props.description);
 
   return (
@@ -29,7 +29,6 @@ export default function EditItem(props, { id, updateItem }) {
       </Button>
       <StyledModal
         open={open}
-        onClick={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -45,7 +44,7 @@ export default function EditItem(props, { id, updateItem }) {
             onSubmit={(e) => {
               handleClose();
               e.preventDefault();
-              updateItem(id, name, description);
+              props.updateItem(props.id, name, description);
             }}
           >
             <div className="form__name-section">
@@ -82,7 +81,9 @@ export default function EditItem(props, { id, updateItem }) {
               <button className="cancel" onClick={handleClose}>
                 Cancel
               </button>
-              <button className="create-event" form='editmodal'>Update Event</button>
+              <button className="create-event" form="editmodal">
+                Update Event
+              </button>
             </div>
           </form>
         </StyledBox>

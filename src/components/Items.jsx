@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import EditItem from "./EditItem";
-const Items = ({ index, description, editItem }) => {
+const Items = ({ index, description, editItem, deleteItem }) => {
   return (
     <Item>
       <div className="name">
@@ -14,7 +14,9 @@ const Items = ({ index, description, editItem }) => {
       </div>
       <div className="buttons">
         {editItem}
-        <button className="delete">Delete</button>
+        <button className="delete" onClick={deleteItem}>
+          Delete
+        </button>
       </div>
     </Item>
   );
@@ -23,12 +25,24 @@ const Items = ({ index, description, editItem }) => {
 export default Items;
 
 const Item = styled.div`
-  margin-right: 32px;
+  margin: 16px;
   width: 420px;
   padding: 20px;
   background: #ffffff;
   border: 1px solid #f0f0f0;
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  @media screen and (max-width: 1024px) {
+    width: 320px;
+  }
+  @media screen and (max-width: 770px) {
+    width: 420px;
+  }
+  @media screen and (max-width: 640px) {
+    width: 280px;
+  }
   .name {
     margin-bottom: 16px;
     p {

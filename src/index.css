@@ -2,6 +2,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   min-height: -webkit-fill-available;
+  background-color: #f0f0f0;
 }
 html {
   height: -webkit-fill-available;
