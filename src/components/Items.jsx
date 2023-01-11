@@ -1,18 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-const Items = ({ index, description }) => {
+import EditItem from "./EditItem";
+const Items = ({ index, description, editItem }) => {
   return (
     <Item>
       <div className="name">
         <p>Name</p>
-        <h2>Item {index}</h2>
+        <h2>{index}</h2>
       </div>
       <div className="description">
         <h4>Description</h4>
         <p>{description}</p>
       </div>
       <div className="buttons">
-        <button className="edit">Edit</button>
+        {editItem}
         <button className="delete">Delete</button>
       </div>
     </Item>

@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -14,50 +14,75 @@ const style = {
   boxShadow: 2,
 };
 
-export default function DashboardModal() {
-  const [open, setOpen] = React.useState(false);
+export default function EditItem(props, { id, updateItem }) {
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const [name, setName] = useState(props.names);
+  const [description, setDescription] = useState(props.description);
+
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen} style={{ padding: 0, color: "#EFEFF0" }}>
+        <button className="edit">Edit</button>
+      </Button>
       <StyledModal
         open={open}
+        onClick={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <StyledBox sx={style}>
           <div className="head-text">
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Create Item
+              Edit Item
             </Typography>
           </div>
           <div className="modal__line" />
-          <form>
+          <form
+            id="editmodal"
+            onSubmit={(e) => {
+              handleClose();
+              e.preventDefault();
+              updateItem(id, name, description);
+            }}
+          >
             <div className="form__name-section">
               <div>
                 <label htmlFor="name">Name</label>
               </div>
 
               <div>
-                <input id="name" placeholder="Input item name here" />
+                <input
+                  id="name"
+                  placeholder="Input item name here"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                />
               </div>
             </div>
-
             <div className="form__description-section">
               <div>
-                <label htmlFor="note">Add Note</label>
+                <label htmlFor="note">Description</label>
               </div>
               <div>
-                <textarea placeholder="Type here"></textarea>
+                <textarea
+                  placeholder="Type here"
+                  value={description}
+                  onChange={(e) => {
+                    setDescription(e.target.value);
+                  }}
+                ></textarea>
               </div>
             </div>
             <div className="buttons">
               <button className="cancel" onClick={handleClose}>
                 Cancel
               </button>
-              <button className="create-event">Create Event</button>
+              <button className="create-event" form='editmodal'>Update Event</button>
             </div>
           </form>
         </StyledBox>

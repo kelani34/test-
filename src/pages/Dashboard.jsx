@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Items from "../components/Items";
 import { AiFillCaretDown } from "react-icons/ai";
@@ -8,25 +8,36 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 import DashboardModal from "../components/DashboardModal";
+import EditItem from "../components/EditItem";
 
-const items = [
-  {
-    index: 1,
-    description:
-      "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
-  },
-  {
-    index: 2,
-    description:
-      "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
-  },
-  {
-    index: 3,
-    description:
-      "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
-  },
-];
 const Dashboard = () => {
+  const [items, setItems] = useState([
+    {
+      name: "Item 1",
+      description:
+        "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+    },
+    {
+      name: "Item 2",
+      description:
+        "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+    },
+    {
+      name: "Item 3",
+      description:
+        "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+    },
+  ]);
+
+  function updateItems(id, name, description) {
+    const updatedItems = items.map((item) => {
+      if (id === item.id) {
+        return { ...item, description: description, name: name };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  }
   return (
     <Wrapper>
       <header>
@@ -54,7 +65,15 @@ const Dashboard = () => {
       <div className="container">
         <div className="items">
           {items.map((item) => {
-            return <Items index={item.index} description={item.description} />;
+            const editItem = (
+              <EditItem
+                id={item.id}
+                name={item.name}
+                description={item.description}
+                updateItem={updateItems}
+              />
+            );
+            return <Items index={item.name} description={item.description} editItem={editItem}/>;
           })}
         </div>
 
