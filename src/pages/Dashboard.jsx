@@ -121,6 +121,9 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 25px 55px 27px 58px;
+    @media screen and (max-width: 770px) {
+      padding: 25px 25px 27px 25px;
+    }
     .profile {
       display: flex;
       align-items: center;
